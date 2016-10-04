@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tweets on Rio Paralympics 2016</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+	<link rel="stylesheet" href="./static/lib/css//bootstrap.min.css">
+	<link rel="stylesheet" href="./static/lib/css/keen-dashboards.css">
+	<link rel="stylesheet" href="./static/css/custom.css">
+</head>
+
+
+<body class="application" >
+
+
+<!-- link in javascript files necessary -->
+	<script src="./static/lib/js/jquery.min.js"></script>
+	<script src="./static/lib/js/bootstrap.min.js"></script>
+	 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	 <script type="text/javascript">
+  		var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+	</script>
+	<!--<script src="./static/lib/js/d3.js"></script>-->
+
+ 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script src="./static/lib/js/queue.js"></script>
+	<script src="./static/lib/js/keen.min.js"></script>
+	<script src="./static/lib/js/keen.min.js"></script>
+
+
+<!-- navbar code -->
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="../">
+					<img src="./static/img/logo.png"></a>
+				<a class="navbar-brand" href="./">2016 Rio Paralympic Games</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-left">
+					<li><a href="https://keen.io">Tweets</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2">
+				<div class="chart-wrapper">
+					<div class="chart-title">
+						Tweets made with #paralympics
+					</div>
+					<div class="chart-stage" style="height:745px">
+						<table class="table table-hover" id="tweetsTable">
+							<tbody>
+							{% for tweet in tweets %}
+								<tr>
+									<td><div style="height:40px; overflow:hidden" id = "tweet" onclick="clickedTweet('{{tweet.origin}}', '{{tweet.text}}')">{{tweet.text}}</div></td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+						
+						
+ 						
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-10">
+				<div class="chart-wrapper" id = "center">
+					<div class="chart-title" id = "center">
+						Network based on Tweets from the 2016 Paralympics 
+					</div>
+					<div class="chart-stage">
+						<div id ="tweet-chart" style="text-align:center;">
+						</div>
+
+					</div>
+					<div class="chart-notes">
+						<span style="color: lightsteelblue; padding-right:50px;">Selected User</span>
+						<span style="color: steelblue; padding-right:50px;">Follower</span>
+						<span style="color: orange; padding-right:50px;">Retweeted</span>
+						<span style="color: aquamarine; padding-right:50px;">Retweeted</span>
+						<a class="btn" onclick="refresh()">Refresh</a>
+						<a class="btn" onclick="share()">Share</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div class="row">
+
+			<div class="col-sm-12">
+				<div class="chart-wrapper">
+					<div class="chart-title" id = "name">
+						Additional Information
+					</div>
+					<div class="chart-stage">
+   					<span id=name></span>
+   					<span id=handlestring style="font-weight: bold;"></span>
+   					<span id=handle></span><br>
+   					<span id=descstring style="font-weight: bold;"></span>
+   					<span id=desc></span><br>
+   					<span id=urlstring style="font-weight: bold;"></span>
+   					<span id=url></span><br>
+   					<span id=createdstring style="font-weight: bold;"></span>
+   					<span id=createdDate></span><br>
+   					<span id=locationstring style="font-weight: bold;"></span>
+   					<span id=location></span><br>
+   					<span id=tweetsstring style="font-weight: bold;"></span><br>
+   					<span id ="tweets"></span><br>
+					</div>
+					<div class="chart-notes">
+						Additional Information 
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<hr>
+
+		<p class="small text-muted">2016 Shweta Barapatre</p>
+
+	</div>
+	<!-- javascript file containing code for graph creation -->
+	<script src='./static/js/graphs.js' type='text/javascript'></script>
+</body>
+</html>
